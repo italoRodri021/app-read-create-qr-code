@@ -1,0 +1,7 @@
+{
+  "name": "APP_TESTES_CODIGO",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
