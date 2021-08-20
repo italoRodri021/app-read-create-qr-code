@@ -6,8 +6,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { HttpClientModule } from '@angular/common/http';
+
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 
 @NgModule({
   declarations: [
@@ -19,9 +22,15 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
+    NgxQRCodeModule
   ],
   providers: [
-    PreviewAnyFile,
+
+    // -> Barcode
+    BarcodeScanner,
+    Base64ToGallery,
+
+
     { provide: RouteReuseStrategy, 
       useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

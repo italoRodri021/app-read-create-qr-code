@@ -1,11 +1,71 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Testes
-    </ion-title>
+    <ion-title> Leitor de QR-Code </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-segment [(ngModel)]="elementType" scrollable="true">
+    <ion-segment-button value="canvas">
+      <ion-label>Canvas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="img">
+      <ion-label>Imagem</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="url">
+      <ion-label>URL</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
+  <ion-item>
+    <ion-title>Crie Seu QR-CODE</ion-title>
+  </ion-item>
+
+  <ion-item>
+    <ion-input
+      type="text"
+      placeholder="Digite algo"
+      [(ngModel)]="qrData"
+    ></ion-input>
+  </ion-item>
+
+  <br />
+  <ion-button (click)="scanCode()" expand="full" color="success" shape="round">
+    <ion-icon name="qr-scanner" color="light"></ion-icon>
+    Escanear Código</ion-button
+  >
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>SEU QR-CODE</ion-card-title>
+      <ion-card-subtitle>Tipo: {{ elementType }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ngx-qrcode
+        [value]="qrData"
+        [elementType]="elementType"
+        cssClass="qr-code-style"
+      >
+      </ngx-qrcode>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-button
+      (click)="downloadQR()"
+      *ngIf="elementType == 'canvas' "
+      expand="full"
+      color="success"
+      shape="round"
+    >Salvar na Galeria</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="scannedCode">
+    <ion-card-header>
+      <ion-card-title>Resultados do Scanner</ion-card-title>
+      <ion-card-subtitle>Veja os dados do qr-code escaneado.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      {{ scannedCode }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
